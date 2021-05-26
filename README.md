@@ -81,6 +81,7 @@ You will not get the "code" through the web page. Instead, Zoho will use your Re
         })
         Conf.access_token_expire = expire;
         this.json = await res.json();
+        Conf.json = this.json;
         console.log("===============AccessToken========================");
         console.log("token.js - getAccessToken - this.json : ",this.json);
         console.log("==================================================");
