@@ -8,9 +8,7 @@ import token from "./token.js";
 let Conf = new zohoconf();
 let currentToken = new token(Conf);
 
-app.use(express.urlencoded());
-
-
+app.use(express.urlencoded({extended:false}));
 
 const wrapAsync = (fn) => {
     return (req, res, next) => {
@@ -30,7 +28,7 @@ app.get('/', (req, res) => {
 app.get('/invoices', (req, res) => {
     let content = 'Get invoices';
     try {
-        wrapAsync(currentToken.getInvoices(Conf,res));
+        wrapAsync(currentToken.ASgetInvoices(Conf,res));
     } catch(e) {
         if ( "error" in e ) {
             content = e.error;
@@ -56,7 +54,7 @@ app.get('/aruri', (req, res) => {
       content += "Found code !<br>";
       try {
           // Now getting the refresh and access tokens
-          wrapAsync(currentToken.getTokens(Conf,res));
+          wrapAsync(currentToken.ASgetTokens(Conf,res));
       } catch(e) {
           if ( "error" in e ) {
               content = e.error;
